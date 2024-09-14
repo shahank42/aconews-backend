@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 import { z } from "zod";
 import type { GNewsResponse } from "./types";
 
@@ -7,6 +8,8 @@ type Bindings = {
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
+
+app.use("*", cors());
 
 const NewsQuerySchema = z.object({
 	category: z.string(),
